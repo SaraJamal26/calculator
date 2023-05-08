@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "exit 0",
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "autotest": "node tests/calculator.test.js"
   },
   "keywords": [
     "azure",
