@@ -19,5 +19,6 @@ steps:
     export PATH=$(npm bin):$PATH
     npm install
     npm run build
+    npm install -g mocha
     npm test
   displayName: 'npm install, build, and test'
