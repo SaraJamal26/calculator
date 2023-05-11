@@ -4,11 +4,6 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 resources:
   repositories:
-    # - repository: nodejs-calculator
-    #   type: github
-    #   name: SaraJamal26/calculator
-    #   ref: master
-    #   endpoint: https://github.com/SaraJamal26/calculator.git
     - repository: react-app
       type: github
       name: SaraJamal26/React-Landing-Page-Template
