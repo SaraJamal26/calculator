@@ -27,6 +27,7 @@ stages:
     - script: |
         npm install
         npm run build
+
   - job: Test
     displayName: 'Test'
     dependsOn: Build
@@ -68,6 +69,7 @@ stages:
     - script: |
         npm install
         npm run build
+        
   - job: Test
     displayName: 'Test'
     dependsOn: Build
