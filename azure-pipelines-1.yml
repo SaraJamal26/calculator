@@ -1,0 +1,90 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+resources:
+  repositories:
+    # - repository: nodejs-calculator
+    #   type: github
+    #   name: SaraJamal26/calculator
+    #   ref: master
+    #   endpoint: https://github.com/SaraJamal26/calculator.git
+    - repository: react-app
+      type: github
+      name: SaraJamal26/React-Landing-Page-Template
+      ref: master
+      endpoint: github.com_SaraJamal26
+trigger:
+- master
+# pool:
+#   vmImage: ubuntu-latest
+stages:
+- stage: Build_test_Node
+  displayName: 'Build and Test Node.js app'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      clean: true
+      persistCredentials: true
+    - script: |
+        npm install
+        npm run build
+  - job: Test
+    displayName: 'Test'
+    dependsOn: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      clean: true
+      persistCredentials: true
+    - script: |
+        npm install
+        npm test
+    - publish: $(System.DefaultWorkingDirectory)
+      artifact: nodejs-calculator
+
+  # - job: Automation_test
+  #   displayName: 'Automation testing'
+  #   dependsOn: Build
+  #   pool:
+  #     vmImage: 'ubuntu-latest'
+  #   steps:
+  #   - checkout: self
+  #     clean: true
+  #     persistCredentials: true
+  #   - script: |
+  #       npm install
+  #       node tests/calculator.test.js
+- stage: Build_Test_React
+  displayName: 'Build and Test React app'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: react-app
+      clean: true
+      persistCredentials: true
+    - script: |
+        npm install
+        npm run build
+  - job: Test
+    displayName: 'Test'
+    dependsOn: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: react-app
+      clean: true
+      persistCredentials: true
+    - script: |
+        npm install
+        npm test
+    - publish: $(System.DefaultWorkingDirectory)
+      artifact: react-app
