@@ -16,11 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    vsts-npm-auth -config .npmrc
-    export PATH=$(npm bin):$PATH
     npm install
     npm run build
-    npm install -g mocha
-    npm install supertest
     npm test
   displayName: 'npm install, build, and test'
